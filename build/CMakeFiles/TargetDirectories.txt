@@ -1,4 +1,0 @@
-C:/Users/jacek/Desktop/new repos/cout utils thing/build/CMakeFiles/coututils.dir
-C:/Users/jacek/Desktop/new repos/cout utils thing/build/CMakeFiles/coututilsdemo.dir
-C:/Users/jacek/Desktop/new repos/cout utils thing/build/CMakeFiles/edit_cache.dir
-C:/Users/jacek/Desktop/new repos/cout utils thing/build/CMakeFiles/rebuild_cache.dir
