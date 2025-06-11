@@ -5,7 +5,7 @@ add_library(coututils coututils/coututils.cpp)
 
 target_include_directories(coututils PUBLIC coututils)
 
-add_executable(coututilsdemo main.cpp)
+add_executable(coututilsdemo demo.cpp)
 
 target_link_libraries(coututilsdemo PRIVATE coututils)
 
