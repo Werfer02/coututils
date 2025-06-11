@@ -1,13 +1,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
 
 namespace coututils{
 
     struct CharScreenPixel {
         char ch;
         std::string styles;
-        CharScreenPixel(char c = '#', std::string col = "\033[0m") : ch(c), styles(col) {}
+        CharScreenPixel(char c = '#', std::string col = "") : ch(c), styles(col) {}
     }; 
 
     class CharScreen {
@@ -32,9 +34,20 @@ namespace coututils{
 
     };
 
+    class ASCIIfont {
+        public:
+        std::vector<std::string> characters;
+        static std::unordered_map<int, ASCIIfont> fonts;
+        ASCIIfont(std::vector<std::string> chars) : characters(std::move(chars)) {}
+        static int charToASCIIIndex(char c);
+    };
+
+    void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar = '#');
+
     void drawprogressbar(std::ostream& stream, int size, float progress, CharScreenPixel fill = '#',
                                                                          CharScreenPixel empty = ' ',
                                                                          CharScreenPixel borderleft = '[',
                                                                          CharScreenPixel borderright = ']');
+    
 
 }

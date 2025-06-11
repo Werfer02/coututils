@@ -38,6 +38,76 @@ namespace coututils {
         drawScreen(stream);
     }
 
+    int ASCIIfont::charToASCIIIndex(char c) {
+        if(c >= 'A' && c <= 'Z') {
+            return c - 'A';
+        }
+        else if(c >= 'a' && c <= 'z') {
+            return c - 'a';
+        }
+        else if(c >= '0' && c <= '9') {
+            return c - '0' + 26; // 26 letters
+        }
+        else if(c >= '!' && c <= '/') {
+            return c - '!' + 36; // 26 letters + 10 digits
+        }
+        else if(c >= ':' && c <= '@') {
+            return c - ':' + 47; // 26 letters + 10 digits + 15 special
+        }
+        else return ' ';
+    }
+
+    std::unordered_map<int, ASCIIfont> ASCIIfont::fonts = {
+        { 1, {{
+            "### #   ###   # ### ### ### # # ### ### # # #   ### ### ### ### ### ###  ## ### # # # # # # # # # # ###",
+            "### ### #   ### ##  ##  ### ###  #   #  ##  #   ### # # # # ### ### ##  ###  #  # # # # ###  #   #   ##",
+            "# # ### ### ### ### #   ### # # ### ##  # # ### # # # # ### #     # # # ##   #  ###  #  ### # #  #  ###",
+            }}},
+        { 2, {{
+            "##### ####  ##### ##### ##### ##### ##### #   # ##### ##### #   # #     #   # #   # ##### ##### ##### ##### ##### ##### #   # #   # #   # #   # #   # ##### #####     # ##### ##### #   # ##### ##### ##### ##### ##### #      # #   # #   #### ##  #  ##   #         # #       #                               #                               ##### #####",
+            "#   # #   # #      #  # #     #     #     #   #   #      #  #  #  #     ## ## ##  # #   # #   # #   # #   # #       #   #   # #   # #   #  # #   # #     #  #  ##     #     #     # #   # #     #         # #   # #   # #      # #  ##### # #   ## #  #  #  #        #   #    #####   #                        #   #     #      #    ###    #       # #   #",
+            "##### ####  #      #  # ##### ##### #  ## #####   #      #  ###   #     # # # # # # #   # ##### # # # ##### #####   #   #   # #   # # # #   #     #     #   # # #     # ##### ##### ##### ##### #####     # ##### ##### #            # #   ###    #     # #          #   #     # #   ###         ###          #                #             #    ### # # #",
+            "#   # #   # #      #  # #     #     #   # #   #   #      #  #  #  #     #   # #  ## #   # #     #  ## #  #      #   #   #   #  # #  # # #  # #    #    #    ##  #     # #         #     #     # #   #     # #   #     #             #####   # #  # ## #  #           #   #            #   #                  #     #     #      #    ###    #         # ###",
+            "#   # ####  ##### ##### ##### #     ##### #   # ##### ####  #   # ##### #   # #   # ##### #     ##### #   # #####   #   #####   #   ##### #   #   #   ##### #####     # ##### #####     # ##### #####     # ##### ##### #            # #  ####  #  ##  ## #           # #                 #           #     #            #                        #   #####",
+            }}}
+    };
+
+    void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar) {
+
+        int fontdimension = fontsize * 2 + 1;
+
+        for (int i = 0; i < fontdimension; i++){
+
+            std::string asciiline;
+            for (const char c : text) {
+                if(c == ' ') {
+                    asciiline += std::string(fontdimension + 1, ' ');
+                    continue;
+                }
+                std::string asciicharline = ASCIIfont::fonts.at(fontsize).characters[i].substr((ASCIIfont::charToASCIIIndex(c)) * (fontdimension + 1), fontdimension + 1);
+                if (defaultchar.ch != '#' || !defaultchar.styles.empty()) {
+                    std::string styledline;
+                    for (char ch : asciicharline) {
+                        if (ch == '#') {
+                            styledline += defaultchar.styles;  // insert styles before
+                            styledline += defaultchar.ch;
+                        } else {
+                            styledline += ch; // keep unchanged
+                        }
+                    }
+                    asciicharline = styledline;
+                }
+                asciiline += asciicharline;
+
+            }
+
+            if (i < fontdimension - 1) stream << asciiline << "\033[0m" << "\n";
+            else stream << asciiline << "\033[0m"; // last line without newline
+
+        }
+
+    }
+
     void drawprogressbar(std::ostream& stream, int size, float progress, CharScreenPixel fill, CharScreenPixel empty, CharScreenPixel borderleft, CharScreenPixel borderright) {
         int filled = static_cast<int>(size * progress);
         int unfilled = size - filled;
