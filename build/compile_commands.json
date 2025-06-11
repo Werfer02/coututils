@@ -1,0 +1,14 @@
+[
+{
+  "directory": "C:/Users/jacek/Desktop/new repos/cout utils thing/build",
+  "command": "C:\\MinGW\\winlibs-x86_64-posix-seh-gcc-14.1.0-llvm-18.1.5-mingw-w64ucrt-11.0.1-r1\\mingw64\\bin\\c++.exe  @CMakeFiles/coututils.dir/includes_CXX.rsp -g -o CMakeFiles\\coututils.dir\\coututils\\coututils.cpp.obj -c \"C:\\Users\\jacek\\Desktop\\new repos\\cout utils thing\\coututils\\coututils.cpp\"",
+  "file": "C:/Users/jacek/Desktop/new repos/cout utils thing/coututils/coututils.cpp",
+  "output": "CMakeFiles/coututils.dir/coututils/coututils.cpp.obj"
+},
+{
+  "directory": "C:/Users/jacek/Desktop/new repos/cout utils thing/build",
+  "command": "C:\\MinGW\\winlibs-x86_64-posix-seh-gcc-14.1.0-llvm-18.1.5-mingw-w64ucrt-11.0.1-r1\\mingw64\\bin\\c++.exe  @CMakeFiles/coututilsdemo.dir/includes_CXX.rsp -g -o CMakeFiles\\coututilsdemo.dir\\main.cpp.obj -c \"C:\\Users\\jacek\\Desktop\\new repos\\cout utils thing\\main.cpp\"",
+  "file": "C:/Users/jacek/Desktop/new repos/cout utils thing/main.cpp",
+  "output": "CMakeFiles/coututilsdemo.dir/main.cpp.obj"
+}
+]
