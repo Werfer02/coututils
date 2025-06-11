@@ -1,2 +1,2 @@
 ## coututils
-WIP TUI library in C++
+WIP TUI / text info display library in C++
