@@ -17,7 +17,7 @@ namespace coututils{
         int width;
         int height;
         std::vector<CharScreenPixel> screen;
-        bool extrahorizontalspacing = false;
+        bool extrahorizontalspacing;
 
     public:
 
