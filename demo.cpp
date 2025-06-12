@@ -46,8 +46,8 @@ int main() {
 
     coututils::drawASCIItext(std::cout, "Hello, World!", 2);
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'#', "\033[34m\033[1m\033[102m"}); // Custom parameters
+    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"}); // Custom parameters
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'#', "\033[91m\033[103m"}); // Custom parameters with different color
+    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'%', "\033[91m\033[103m"}); // Custom parameters with different color
 
 }
