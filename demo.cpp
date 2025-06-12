@@ -1,5 +1,6 @@
 #include <iostream>
-#include <windows.h>
+#include <thread>
+#include <chrono>
 
 #include "coututils/coututils.hpp"
 
@@ -10,14 +11,14 @@ int main() {
     for (int i = 0; i <= 20; ++i) {
         coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20);
         std::cout << "\r"; 
-        Sleep(50);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     std::cout << "\n";
     std::cin.get();
     for (int i = 0; i <= 20; ++i) {
         coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, '&', '-', '(', ')'); // Custom parameters without newline
         std::cout << "\r";
-        Sleep(50);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     std::cout << "\n";
     std::cin.get();
@@ -29,7 +30,7 @@ int main() {
         for (int j = 0; j < 20; ++j) {
             screen.setChar(j, i, {'A' + (i + j) % 26, "\033[34m\033[1m\033[102m"});
             screen.drawScreenInPlace(std::cout);
-            Sleep(5);
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
     }
     for (int sum = 0; sum <= 10 + 10 - 2; ++sum) {
@@ -41,13 +42,13 @@ int main() {
             }
         }
         screen.drawScreenInPlace(std::cout);
-        Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     coututils::drawASCIItext(std::cout, "Hello, World!", 2);
     std::cout << "\n";
     coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"}); // Custom parameters
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'%', "\033[91m\033[103m"}); // Custom parameters with different color
+    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"}); // Custom parameters with different color
 
 }
