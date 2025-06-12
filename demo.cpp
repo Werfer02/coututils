@@ -37,7 +37,7 @@ int main() {
         for (int y = 0; y < 10; ++y) {
             int x = sum - y;
             if (x >= 0 && x < 10) {
-                screen.setChar(x, y, {'*', "\033[91m\033[103m"}); 
+                screen.setChar(x, y, {'*', "\033[" + std::to_string((sum % 8) + 90) + "m"}); 
             }
         }
         screen.drawScreenInPlace(std::cout);
