@@ -1,6 +1,6 @@
 # coututils
 
-WIP TUI utility library in C++
+WIP TUI utility library in C++ (ab)using ANSI escape codes
 
 ## features
 - customizable progress bars
