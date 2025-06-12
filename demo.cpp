@@ -16,7 +16,7 @@ int main() {
     std::cout << "\n";
     std::cin.get();
     for (int i = 0; i <= 20; ++i) {
-        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, '&', '-', '(', ')');
+        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, {'&', "\033[92m"}, '-', '(', ')');
         std::cout << "\r";
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
