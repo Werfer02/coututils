@@ -1,2 +1,2 @@
 ## coututils
-WIP TUI library in C++
+WIP TUI utility library in C++
