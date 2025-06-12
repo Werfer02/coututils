@@ -115,14 +115,14 @@ namespace coututils {
         std::string output;
         output.reserve(size * 10); // speed
 
-        output += borderleft.styles + borderleft.ch;
+        output += borderleft.styles + borderleft.ch + "\033[0m";
         for (int i = 0; i < filled; ++i) {
-            output += fill.styles + fill.ch;
+            output += fill.styles + fill.ch + "\033[0m"; // reset styles
         }
         for (int i = 0; i < unfilled; ++i) {
-            output += empty.styles + empty.ch;
+            output += empty.styles + empty.ch + "\033[0m";
         }
-        output += borderright.styles + borderright.ch;
+        output += borderright.styles + borderright.ch + "\033[0m";
 
         stream << output;
     }
