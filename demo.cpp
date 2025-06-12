@@ -37,7 +37,6 @@ int main() {
         for (int y = 0; y < 10; ++y) {
             int x = sum - y;
             if (x >= 0 && x < 10) {
-                // Change the character/color at (x,y)
                 screen.setChar(x, y, {'*', "\033[91m\033[103m"}); 
             }
         }
