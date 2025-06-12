@@ -16,7 +16,7 @@ int main() {
     std::cout << "\n";
     std::cin.get();
     for (int i = 0; i <= 20; ++i) {
-        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, '&', '-', '(', ')'); // Custom parameters without newline
+        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, '&', '-', '(', ')');
         std::cout << "\r";
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
@@ -47,8 +47,8 @@ int main() {
 
     coututils::drawASCIItext(std::cout, "Hello, World!", 2);
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"}); // Custom parameters
+    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"});
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"}); // Custom parameters with different color
+    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"});
 
 }
