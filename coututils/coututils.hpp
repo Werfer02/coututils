@@ -49,5 +49,6 @@ namespace coututils{
                                                                          CharScreenPixel borderleft = '[',
                                                                          CharScreenPixel borderright = ']');
     
+    void clearScreen(std::ostream& stream);
 
 }

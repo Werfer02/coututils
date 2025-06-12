@@ -129,4 +129,8 @@ namespace coututils {
         stream << output;
     }
 
+    void clearScreen(std::ostream& stream) {
+        stream << "\033[H\033[J"; // move to top left and clear
+    }
+
 }
