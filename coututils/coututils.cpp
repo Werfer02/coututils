@@ -52,7 +52,7 @@ namespace coututils {
             return c - '!' + 36; // 26 letters + 10 digits
         }
         else if(c >= ':' && c <= '@') {
-            return c - ':' + 47; // 26 letters + 10 digits + 15 special
+            return c - ':' + 51; // 26 letters + 10 digits + 15 special
         }
         else return ' ';
     }
