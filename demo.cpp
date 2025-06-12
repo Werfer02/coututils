@@ -50,4 +50,8 @@ int main() {
     std::cout << "\n";
     coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"});
 
+    coututils::moveCursorTo(5, 2, std::cout);
+    std::cout << "Cursor moved to (5, 2)!\n\n\n";
+    std::cout << "Moved back!\n";
+
 }
