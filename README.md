@@ -10,7 +10,8 @@ WIP TUI utility library in C++
 ## example
 
 ```cpp
-coututils::drawprogressbar(std::cout, 20, 0.5f);  // [##########          ]
+coututils::drawprogressbar(std::cout, 20, 0.5f);                      // [##########          ]
+
 coututils::drawprogressbar(std::cout, 20, 0.5f, '&', '-', '(', ')');  // (&&&&&&&&&&----------)
 
 coututils::drawASCIItext(std::cout, "Hello, World!", 2);  //  #   # ##### #     #     #####             #   # ##### ##### #     ##### #     
