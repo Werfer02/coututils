@@ -2,6 +2,16 @@
 
 namespace coututils {
 
+    void clearScreen(std::ostream& stream) {
+        stream << "\033[H\033[J"; // move to top left and clear
+    }
+
+    void moveCursorTo(int x, int y, std::ostream& stream) {
+        stream << "\033[G"; // move to beginning of line
+        for (int i = 0; i < x; ++i) stream << ansi::cursor_right; // move right
+        for (int i = 0; i < y; ++i) stream << ansi::cursor_up; // move up
+    }
+
     void CharScreen::setChar(int x, int y, CharScreenPixel c) {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             screen[y * width + x] = c;
@@ -32,9 +42,7 @@ namespace coututils {
     }
 
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
-        for(int i = 0; i < height; ++i) {
-            stream << "\033[F";
-        }
+        moveCursorTo(0, height, stream); // Move cursor to top left
         drawScreen(stream);
     }
 
@@ -127,10 +135,6 @@ namespace coututils {
         output += borderright.styles + borderright.ch + "\033[0m";
 
         stream << output;
-    }
-
-    void clearScreen(std::ostream& stream) {
-        stream << "\033[H\033[J"; // move to top left and clear
     }
 
 }
