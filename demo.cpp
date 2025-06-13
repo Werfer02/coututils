@@ -1,10 +1,12 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include <windows.h>
 
 #include "coututils/coututils.hpp"
 
+#ifdef _WIN32
+    #include <windows.h> 
+#endif
 
 int main() {
 
