@@ -1,11 +1,19 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <windows.h>
 
 #include "coututils/coututils.hpp"
 
 
 int main() {
+
+    #ifdef _WIN32 // support for ansi codes in windows console
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        DWORD mode;
+        GetConsoleMode(hConsole, &mode);
+        SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING); // add this flag to the console mode
+    #endif
 
     coututils::clearScreen(std::cout);
     for (int i = 0; i <= 20; ++i) {
