@@ -88,6 +88,12 @@ namespace coututils {
             }}}
     };
 
+    char brightnessToChar(float brightness) {
+        std::string chars = " .`^\",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+        return chars[int(brightness  / 1.f  * 70)];
+    }
+
+
     void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar) {
 
         int fontdimension = fontsize * 2 + 1;

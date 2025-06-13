@@ -105,6 +105,8 @@ namespace coututils{
         static int charToASCIIIndex(char c);
     };
 
+    char brightnessToChar(float brightness);
+
     void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar = '#');
 
     void drawprogressbar(std::ostream& stream, int size, float progress, CharScreenPixel fill = '#',
