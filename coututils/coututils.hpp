@@ -65,6 +65,8 @@ namespace coututils{
         inline const std::string cursor_left = "\033[D";
         inline const std::string cursor_home = "\033[G";
 
+        std::string rgb(int r, int g, int b);
+
     }
 
     struct CharScreenPixel {

@@ -2,6 +2,14 @@
 
 namespace coututils {
 
+    namespace ansi {
+
+        std::string rgb(int r, int g, int b) {
+            return "\033[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m";
+        }
+
+    }
+
     void clearScreen(std::ostream& stream) {
         stream << "\033[H\033[J"; // move to top left and clear
     }
