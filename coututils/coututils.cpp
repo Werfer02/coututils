@@ -137,7 +137,7 @@ namespace coututils {
     };
 
     char brightnessToChar(float brightness) {
-        std::string chars = " .`^\",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B$@";
+        std::string chars = " .`^\",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
         return chars[int(brightness * (chars.size() - 1))];
     }
 
