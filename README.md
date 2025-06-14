@@ -5,7 +5,7 @@ WIP TUI utility library in C++ (ab)using ANSI escape codes
 ## features
 - customizable progress bars
 - customizable ASCII art text rendering
-- customizable CharScreen for 2D graphics
+- customizable CharScreen for 2D graphics and displaying images
 
 ## example
 
