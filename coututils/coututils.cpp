@@ -59,6 +59,10 @@ namespace coututils {
     }
 
     CharScreen CharScreen::loadImage(const unsigned char* data, int width, int height, int channels) {
+        if (!data) {
+            std::cerr << "Error: image data is null!\n";
+            return CharScreen(width, height);
+        }
         std::vector<CharScreenPixel> pixels(width * height);
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
@@ -114,7 +118,7 @@ namespace coututils {
 
     char brightnessToChar(float brightness) {
         std::string chars = " .`^\",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
-        return chars[int(brightness  / 1.f  * 70)];
+        return chars[int(brightness * (chars.size() - 1))];
     }
 
 

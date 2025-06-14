@@ -2,11 +2,14 @@
 #include <thread>
 #include <chrono>
 
-#include "coututils/coututils.hpp"
+#include "coututils.hpp"
 
 #ifdef _WIN32
     #include <windows.h> 
 #endif
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 int main() {
 
@@ -63,5 +66,11 @@ int main() {
     coututils::moveCursorTo(5, 2, std::cout);
     std::cout << "Cursor moved to (5, 2)!\n\n\n";
     std::cout << "Moved back!\n";
+
+    int width, height, channels;
+    unsigned char* data = stbi_load("../demo/apple_50x50.bmp", &width, &height, &channels, 0);
+    coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data, width, height, channels);
+    stbi_image_free(data);
+    imageScreen.drawScreen(std::cout);
 
 }
