@@ -67,6 +67,7 @@ namespace coututils{
         inline const std::string cursor_home = "\033[G";
 
         std::string rgb(int r, int g, int b);
+        std::string rgb_bg(int r, int g, int b);
 
     }
 

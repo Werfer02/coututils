@@ -7,6 +7,9 @@ namespace coututils {
         std::string rgb(int r, int g, int b) {
             return "\033[38;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m";
         }
+        std::string rgb_bg(int r, int g, int b) {
+            return "\033[48;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m";
+        }
 
     }
 
