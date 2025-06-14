@@ -58,10 +58,9 @@ namespace coututils {
         drawScreen(stream);
     }
 
-    CharScreen CharScreen::loadImage(const unsigned char* data, int width, int height, int channels) {
+    std::vector<CharScreenPixel> imageToCharScreenPixels(const unsigned char* data, int width, int height, int channels) {
         if (!data) {
             std::cerr << "Error: image data is null!\n";
-            return CharScreen(width, height);
         }
         std::vector<CharScreenPixel> pixels(width * height);
         for (int y = 0; y < height; ++y) {
@@ -77,9 +76,27 @@ namespace coututils {
             }
         }
 
+        return pixels;
+    }
+
+    CharScreen CharScreen::loadImage(const unsigned char* data, int width, int height, int channels) {
+        
+        std::vector<CharScreenPixel> pixels = imageToCharScreenPixels(data, width, height, channels);
+
         CharScreen screen(width, height);
-        screen.setScreen(pixels);
+        screen.setScreen(std::move(pixels));
         return screen;
+
+    }
+
+    void CharScreen::loadImageToScreen(const unsigned char* data, int imgwidth, int imgheight, int channels,
+        std::function<const unsigned char* (const unsigned char*, int, int, int, int, int)> scalefunc) {
+
+        const unsigned char* scaledData = scalefunc(data, imgwidth, imgheight, channels, width, height);
+        std::vector<CharScreenPixel> pixels = imageToCharScreenPixels(scaledData, width, height, channels);
+
+        setScreen(std::move(pixels));
+
     }
 
     int ASCIIfont::charToASCIIIndex(char c) {
@@ -177,6 +194,20 @@ namespace coututils {
         output += borderright.styles + borderright.ch + "\033[0m";
 
         stream << output;
+    }
+
+    const unsigned char* nearestNeighbourScale(const unsigned char* data, int srcW, int srcH, int channels, int dstW, int dstH) {
+        unsigned char* out = new unsigned char[dstW * dstH * channels];
+        for (int y = 0; y < dstH; ++y) {
+            for (int x = 0; x < dstW; ++x) {
+                int srcX = x * srcW / dstW; // calculate nearest
+                int srcY = y * srcH / dstH;
+                for (int c = 0; c < channels; ++c) {
+                    out[(y * dstW + x) * channels + c] = data[(srcY * srcW + srcX) * channels + c];
+                }
+            }
+        }
+        return out;
     }
 
 }

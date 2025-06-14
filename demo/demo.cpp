@@ -70,7 +70,11 @@ int main() {
     int width, height, channels;
     unsigned char* data = stbi_load("../demo/apple_50x50.bmp", &width, &height, &channels, 0);
     coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data, width, height, channels);
-    stbi_image_free(data);
     imageScreen.drawScreen(std::cout);
 
+    coututils::CharScreen imageScreen2(30, 15);
+    imageScreen2.loadImageToScreen(data, width, height, channels, coututils::nearestNeighbourScale);
+    imageScreen2.drawScreen(std::cout);
+    stbi_image_free(data);
+    
 }
