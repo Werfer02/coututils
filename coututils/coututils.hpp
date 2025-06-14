@@ -76,7 +76,7 @@ namespace coututils{
         CharScreenPixel(char c = '#', std::string col = "") : ch(c), styles(col) {}
     };
 
-    const unsigned char* nearestNeighbourScale(const unsigned char* data, int srcW, int srcH, int channels, int dstW, int dstH);
+    std::vector<unsigned char> nearestNeighbourScale(const unsigned char* data, int srcW, int srcH, int channels, int dstW, int dstH);
 
     class CharScreen {
 
@@ -102,7 +102,7 @@ namespace coututils{
 
         static CharScreen loadImage(const unsigned char* data, int width, int height, int channels);
         void loadImageToScreen(const unsigned char* data, int width, int height, int channels,
-             std::function<const unsigned char* (const unsigned char*, int, int, int, int, int)> scalefunc = nearestNeighbourScale);
+             std::function<std::vector<unsigned char> (const unsigned char*, int, int, int, int, int)> scalefunc = nearestNeighbourScale);
 
     };
 

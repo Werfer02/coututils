@@ -76,5 +76,5 @@ int main() {
     imageScreen2.loadImageToScreen(data, width, height, channels, coututils::nearestNeighbourScale);
     imageScreen2.drawScreen(std::cout);
     stbi_image_free(data);
-    
+
 }

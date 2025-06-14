@@ -90,10 +90,10 @@ namespace coututils {
     }
 
     void CharScreen::loadImageToScreen(const unsigned char* data, int imgwidth, int imgheight, int channels,
-        std::function<const unsigned char* (const unsigned char*, int, int, int, int, int)> scalefunc) {
+        std::function<std::vector<unsigned char> (const unsigned char*, int, int, int, int, int)> scalefunc) {
 
-        const unsigned char* scaledData = scalefunc(data, imgwidth, imgheight, channels, width, height);
-        std::vector<CharScreenPixel> pixels = imageToCharScreenPixels(scaledData, width, height, channels);
+        std::vector<unsigned char> scaledData = scalefunc(data, imgwidth, imgheight, channels, width, height);
+        std::vector<CharScreenPixel> pixels = imageToCharScreenPixels(scaledData.data(), width, height, channels);
 
         setScreen(std::move(pixels));
 
@@ -196,8 +196,8 @@ namespace coututils {
         stream << output;
     }
 
-    const unsigned char* nearestNeighbourScale(const unsigned char* data, int srcW, int srcH, int channels, int dstW, int dstH) {
-        unsigned char* out = new unsigned char[dstW * dstH * channels];
+    std::vector<unsigned char> nearestNeighbourScale(const unsigned char* data, int srcW, int srcH, int channels, int dstW, int dstH) {
+        std::vector<unsigned char> out(dstW * dstH * channels);
         for (int y = 0; y < dstH; ++y) {
             for (int x = 0; x < dstW; ++x) {
                 int srcX = x * srcW / dstW; // calculate nearest
