@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <functional>
 
 namespace coututils{
 
@@ -89,11 +90,15 @@ namespace coututils{
 
         void setChar(int x, int y, CharScreenPixel c);
 
+        void setScreen(std::vector<CharScreenPixel> pixels);
+
         void clearScreen(CharScreenPixel defaultchar);
 
         void drawScreen(std::ostream& stream);
 
         void drawScreenInPlace(std::ostream& stream);
+
+        static CharScreen loadImage(const unsigned char* data, int width, int height, int channels);
 
     };
 

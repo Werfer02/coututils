@@ -30,6 +30,10 @@ namespace coututils {
         screen = std::vector(width * height, defaultchar);
     }
 
+    void CharScreen::setScreen(std::vector<CharScreenPixel> pixels){
+        screen = std::move(pixels);
+    }
+
     void CharScreen::drawScreen(std::ostream& stream) {
         std::string output;
         output.reserve(height * (width * 10)); // speed
@@ -52,6 +56,26 @@ namespace coututils {
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
         moveCursorTo(0, height, stream); // Move cursor to top left
         drawScreen(stream);
+    }
+
+    CharScreen CharScreen::loadImage(const unsigned char* data, int width, int height, int channels) {
+        std::vector<CharScreenPixel> pixels(width * height);
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                int index = (y * width + x) * channels;
+
+                int r = data[index];
+                int g = data[index + 1];
+                int b = data[index + 2];
+
+                float brightness = (r + g + b) / (3.0f * 255.0f);
+                pixels[y * width + x] = CharScreenPixel(brightnessToChar(brightness), ansi::rgb(r, g, b));
+            }
+        }
+
+        CharScreen screen(width, height);
+        screen.setScreen(pixels);
+        return screen;
     }
 
     int ASCIIfont::charToASCIIIndex(char c) {
