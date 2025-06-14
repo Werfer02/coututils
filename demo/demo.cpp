@@ -72,7 +72,7 @@ int main() {
     coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data, width, height, channels);
     imageScreen.drawScreen(std::cout);
 
-    coututils::CharScreen imageScreen2(100, 50);
+    coututils::CharScreen imageScreen2(30, 15);
     imageScreen2.loadImageToScreen(data, width, height, channels, coututils::nearestNeighbourScale);
     imageScreen2.drawScreen(std::cout);
     stbi_image_free(data);
