@@ -1,5 +1,9 @@
 #include "coututils.hpp"
 
+#ifdef _WIN32
+    #include <windows.h>
+#endif
+
 namespace coututils {
 
     namespace ansi {
@@ -12,6 +16,19 @@ namespace coututils {
         }
 
     }
+
+    #ifdef _WIN32
+        void initWindowsConsole() {
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            DWORD mode;
+            GetConsoleMode(hConsole, &mode);
+            SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING); // add this flag to the console mode
+        }
+    #else
+        void initWindowsConsole() {
+            // No-op for non-Windows systems
+        }
+    #endif
 
     void clearScreen(std::ostream& stream) {
         stream << "\033[H\033[J"; // move to top left and clear

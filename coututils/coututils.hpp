@@ -71,6 +71,8 @@ namespace coututils{
 
     }
 
+    void initWindowsConsole();
+
     struct CharScreenPixel {
         char ch;
         std::string styles;

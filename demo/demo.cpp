@@ -4,21 +4,12 @@
 
 #include "coututils.hpp"
 
-#ifdef _WIN32
-    #include <windows.h> 
-#endif
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 int main() {
 
-    #ifdef _WIN32 // support for ansi codes in windows console
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        DWORD mode;
-        GetConsoleMode(hConsole, &mode);
-        SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING); // add this flag to the console mode
-    #endif
+    coututils::initWindowsConsole();
 
     coututils::clearScreen(std::cout);
     for (int i = 0; i <= 20; ++i) {
