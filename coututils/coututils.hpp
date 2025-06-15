@@ -101,6 +101,8 @@ namespace coututils{
 
         void drawScreenInPlace(std::ostream& stream);
 
+        void drawScreenAt(std::ostream& stream, int x, int y);
+
         static CharScreen loadImage(const unsigned char* data, int width, int height, int channels);
         void loadImageToScreen(const unsigned char* data, int width, int height, int channels,
              std::function<std::vector<unsigned char> (const unsigned char*, int, int, int, int, int)> scalefunc = nearestNeighbourScale);

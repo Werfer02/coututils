@@ -1,4 +1,6 @@
 #include "coututils.hpp"
+#include <thread>
+#include <chrono>
 
 namespace coututils {
 
@@ -47,10 +49,8 @@ namespace coututils {
             for (int j = 0; j < width; ++j) {
                 const auto& px = screen[i * width + j];
                 output += px.styles + px.ch;
-                if (extrahorizontalspacing) {
-                    output += " "; // Extra horizontal spacing
-                }
-                output += "\033[0m"; // Reset styles
+                if (extrahorizontalspacing) output += " "; 
+                output += "\033[0m"; // reset styles
             }
             output += "\n";
         }
@@ -61,6 +61,25 @@ namespace coututils {
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
         moveCursorTo(0, height, stream); // Move cursor to top left
         drawScreen(stream);
+    }
+
+    void CharScreen::drawScreenAt(std::ostream& stream, int x, int y) {
+        moveCursorTo(x, y, stream); // go to correct x,y
+        std::string output;
+        output.reserve(height * (width * 10)); // speed
+        for (int row = 0; row < height; ++row) {
+            if (row > 0) output += ansi::cursor_down + "\033[" + std::to_string(width) + "D"; // move down one row and back to start
+
+            for (int col = 0; col < width; ++col) {
+                const auto& pixel = screen[row * width + col];
+                output += pixel.styles + pixel.ch;
+                output += "\033[0m"; // reset styles
+
+                if (extrahorizontalspacing) output += " "; 
+            }
+        }
+
+        stream << output;
     }
 
     std::vector<CharScreenPixel> imageToCharScreenPixels(const unsigned char* data, int width, int height, int channels) {
