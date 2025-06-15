@@ -50,9 +50,9 @@ int main() {
 
     coututils::drawASCIItext(std::cout, "Hello, World!", 1);
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'@', "\033[34m\033[1m\033[102m"});
+    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'@', coututils::ansi::blue + coututils::ansi::bold + coututils::ansi::bg_bright_green});
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'&', "\033[91m\033[103m"});
+    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'&', coututils::ansi::bright_red + coututils::ansi::bg_bright_yellow});
     std::cout << "\n";
 
     coututils::moveCursorTo(5, 3, std::cout);
