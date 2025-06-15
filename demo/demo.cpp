@@ -69,20 +69,34 @@ int main() {
     coututils::moveCursorTo(0, -3, std::cout);
     std::cout << "Moved back!\n";
 
-    int width, height, channels;
-    unsigned char* data = stbi_load("../demo/apple_50x50.bmp", &width, &height, &channels, 0);
-    coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data, width, height, channels);
+    int width1, height1, channels1;
+    unsigned char* data1 = stbi_load("../demo/apple_50x50.bmp", &width1, &height1, &channels1, 0);
+
+    int width2, height2, channels2;
+    unsigned char* data2 = stbi_load("../demo/orange_50x50.bmp", &width2, &height2, &channels2, 0);
+
+    int width3, height3, channels3;
+    unsigned char* data3 = stbi_load("../demo/banana_50x50.bmp", &width3, &height3, &channels3, 0);
+
+    coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data1, width1, height1, channels1);
     imageScreen.drawScreen(std::cout);
 
     coututils::CharScreen imageScreen2(30, 15);
-    imageScreen2.loadImageToScreen(data, width, height, channels, coututils::nearestNeighbourScale);
+    imageScreen2.loadImageToScreen(data1, width1, height1, channels1, coututils::nearestNeighbourScale);
+    coututils::CharScreen imageScreen3(30, 15);
+    imageScreen3.loadImageToScreen(data2, width2, height2, channels2, coututils::nearestNeighbourScale);
+    coututils::CharScreen imageScreen4(30, 15);
+    imageScreen4.loadImageToScreen(data3, width3, height3, channels3, coututils::nearestNeighbourScale);
+
     imageScreen2.drawScreen(std::cout);
     std::cout << "\n";
-    imageScreen2.drawScreenAt(std::cout, 45, 16);
+    imageScreen3.drawScreenAt(std::cout, 45, 16);
     std::cout << "\n\n";
-    imageScreen2.drawScreenAt(std::cout, 90, 16);
+    imageScreen4.drawScreenAt(std::cout, 90, 16);
     std::cout << "\n";
 
-    stbi_image_free(data);
+    stbi_image_free(data1);
+    stbi_image_free(data2);
+    stbi_image_free(data3);
 
 }
