@@ -25,9 +25,7 @@ namespace coututils {
             SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING); // add this flag to the console mode
         }
     #else
-        void initWindowsConsole() {
-            // No-op for non-Windows systems
-        }
+        void initWindowsConsole() return;
     #endif
 
     void clearScreen(std::ostream& stream) {
@@ -36,9 +34,9 @@ namespace coututils {
 
     void moveCursorTo(int x, int y, std::ostream& stream) {
         stream << "\033[G";
-        if (x > 0) stream << "\033[" << x << "C"; // right 
+        if (x > 0) stream << "\033[" << x << "C";       // right 
         else if (x < 0) stream << "\033[" << -x << "D"; // left
-        if (y > 0) stream << "\033[" << y << "A"; // up
+        if (y > 0) stream << "\033[" << y << "A";       // up
         else if (y < 0) stream << "\033[" << -y << "B"; // down
     }
 
@@ -74,7 +72,7 @@ namespace coututils {
     }
 
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
-        moveCursorTo(0, height, stream); // Move cursor to top left
+        moveCursorTo(0, height, stream); // move cursor to top left
         drawScreen(stream);
     }
 
@@ -100,6 +98,7 @@ namespace coututils {
     std::vector<CharScreenPixel> imageToCharScreenPixels(const unsigned char* data, int width, int height, int channels) {
         if (!data) {
             std::cerr << "Error: image data is null!\n";
+            return;
         }
         std::vector<CharScreenPixel> pixels(width * height);
         for (int y = 0; y < height; ++y) {
