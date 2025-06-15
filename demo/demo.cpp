@@ -20,19 +20,19 @@ int main() {
     std::cout << "\n";
     std::cin.get();
     for (int i = 0; i <= 20; ++i) {
-        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, {'&', "\033[92m"}, '-', '(', ')');
+        coututils::drawprogressbar(std::cout, 20, static_cast<float>(i) / 20, {'&', coututils::ansi::bright_green}, '-', '(', ')');
         std::cout << "\r";
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     std::cout << "\n";
     std::cin.get();
 
-    coututils::CharScreen screen(10, 10, {'#', "\033[32m"}, true);
+    coututils::CharScreen screen(10, 10, {'#', coututils::ansi::red}, true);
 
     screen.drawScreen(std::cout);
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 20; ++j) {
-            screen.setChar(j, i, {'A' + char((i + j) % 26), "\033[34m\033[1m\033[102m"});
+            screen.setChar(j, i, {static_cast<char>('A' + (i + j) % 26), coututils::ansi::blue + coututils::ansi::bold + coututils::ansi::bg_bright_green});
             screen.drawScreenInPlace(std::cout);
             std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
