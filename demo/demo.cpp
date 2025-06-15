@@ -62,9 +62,11 @@ int main() {
     coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"});
     std::cout << "\n";
     coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"});
+    std::cout << "\n";
 
-    coututils::moveCursorTo(5, 2, std::cout);
-    std::cout << "Cursor moved to (5, 2)!\n\n\n";
+    coututils::moveCursorTo(5, 3, std::cout);
+    std::cout << "Cursor moved to (5, 3)!";
+    coututils::moveCursorTo(0, -3, std::cout);
     std::cout << "Moved back!\n";
 
     int width, height, channels;

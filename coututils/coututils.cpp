@@ -18,9 +18,11 @@ namespace coututils {
     }
 
     void moveCursorTo(int x, int y, std::ostream& stream) {
-        stream << "\033[G"; // move to beginning of line
-        for (int i = 0; i < x; ++i) stream << ansi::cursor_right; // move right
-        for (int i = 0; i < y; ++i) stream << ansi::cursor_up; // move up
+        stream << "\033[G";
+        if (x > 0) stream << "\033[" << x << "C"; // right 
+        else if (x < 0) stream << "\033[" << -x << "D"; // left
+        if (y > 0) stream << "\033[" << y << "A"; // up
+        else if (y < 0) stream << "\033[" << -y << "B"; // down
     }
 
     void CharScreen::setChar(int x, int y, CharScreenPixel c) {
