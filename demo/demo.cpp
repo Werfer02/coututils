@@ -57,11 +57,11 @@ int main() {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2);
+    coututils::drawASCIItext(std::cout, "Hello, World!", 1);
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'@', "\033[34m\033[1m\033[102m"});
+    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'@', "\033[34m\033[1m\033[102m"});
     std::cout << "\n";
-    coututils::drawASCIItext(std::cout, "Hello, World!", 2, {'&', "\033[91m\033[103m"});
+    coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'&', "\033[91m\033[103m"});
     std::cout << "\n";
 
     coututils::moveCursorTo(5, 3, std::cout);

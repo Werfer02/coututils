@@ -119,7 +119,7 @@ namespace coututils{
 
     char brightnessToChar(float brightness);
 
-    void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar = '#');
+    void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize = 1, CharScreenPixel defaultchar = '#');
 
     void drawprogressbar(std::ostream& stream, int size, float progress, CharScreenPixel fill = '#',
                                                                          CharScreenPixel empty = ' ',
