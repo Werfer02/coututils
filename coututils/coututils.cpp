@@ -33,7 +33,7 @@ namespace coututils {
     }
 
     void moveCursorTo(int x, int y, std::ostream& stream) {
-        stream << "\033[G";
+        stream << ansi::cursor_home; // move to start of line
         if (x > 0) stream << "\033[" << x << "C";       // right 
         else if (x < 0) stream << "\033[" << -x << "D"; // left
         if (y > 0) stream << "\033[" << y << "A";       // up
@@ -63,7 +63,7 @@ namespace coututils {
                 const auto& px = screen[i * width + j];
                 output += px.styles + px.ch;
                 if (extrahorizontalspacing) output += " "; 
-                output += "\033[0m"; // reset styles
+                output += ansi::reset; // reset styles
             }
             output += "\n";
         }
@@ -86,7 +86,7 @@ namespace coututils {
             for (int col = 0; col < width; ++col) {
                 const auto& pixel = screen[row * width + col];
                 output += pixel.styles + pixel.ch;
-                output += "\033[0m"; // reset styles
+                output += ansi::reset; // reset styles
 
                 if (extrahorizontalspacing) output += " "; 
             }
@@ -201,8 +201,8 @@ namespace coututils {
 
             }
 
-            if (i < fontdimension - 1) stream << asciiline << "\033[0m" << "\n";
-            else stream << asciiline << "\033[0m"; // last line without newline
+            if (i < fontdimension - 1) stream << asciiline << ansi::reset << "\n";
+            else stream << asciiline << ansi::reset; // last line without newline
 
         }
 
@@ -215,16 +215,16 @@ namespace coututils {
         std::string output;
         output.reserve(size * 10); // speed
 
-        output += borderleft.styles + borderleft.ch + "\033[0m"; // reset styles
+        output += borderleft.styles + borderleft.ch + ansi::reset; // reset styles
         for (int i = 0; i < filled; ++i) {
             output += fill.styles + fill.ch; 
         }
-        output += "\033[0m";
+        output += ansi::reset;
         for (int i = 0; i < unfilled; ++i) {
             output += empty.styles + empty.ch;
         }
-        output += "\033[0m";
-        output += borderright.styles + borderright.ch + "\033[0m";
+        output += ansi::reset;
+        output += borderright.styles + borderright.ch + ansi::reset;
 
         stream << output;
     }
