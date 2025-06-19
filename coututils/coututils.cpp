@@ -98,7 +98,7 @@ namespace coututils {
     std::vector<CharScreenPixel> imageToCharScreenPixels(const unsigned char* data, int width, int height, int channels) {
         if (!data) {
             std::cerr << "Error: image data is null!\n";
-            return;
+            return {};
         }
         std::vector<CharScreenPixel> pixels(width * height);
         for (int y = 0; y < height; ++y) {
