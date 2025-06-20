@@ -55,9 +55,9 @@ int main() {
     coututils::drawASCIItext(std::cout, "Hello, World!", 1, {'&', coututils::ansi::bright_red + coututils::ansi::bg_bright_yellow});
     std::cout << "\n";
 
-    coututils::moveCursorTo(5, 3, std::cout);
+    coututils::moveCursorTo(std::cout, 5, 3);
     std::cout << "Cursor moved to (5, 3)!";
-    coututils::moveCursorTo(0, -3, std::cout);
+    coututils::moveCursorTo(std::cout, 0, -3);
     std::cout << "Moved back!\n";
 
     int width1, height1, channels1;

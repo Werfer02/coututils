@@ -32,7 +32,7 @@ namespace coututils {
         stream << "\033[H\033[J"; // move to top left and clear
     }
 
-    void moveCursorTo(int x, int y, std::ostream& stream) {
+    void moveCursorTo(std::ostream& stream, int x, int y) {
         stream << ansi::cursor_home; // move to start of line
         if (x > 0) stream << "\033[" << x << "C";       // right 
         else if (x < 0) stream << "\033[" << -x << "D"; // left
@@ -72,12 +72,12 @@ namespace coututils {
     }
 
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
-        moveCursorTo(0, height - 1, stream); // move cursor to top left
+        moveCursorTo(stream, 0, height - 1); // move cursor to top left
         drawScreen(stream);
     }
 
     void CharScreen::drawScreenAt(std::ostream& stream, int x, int y) {
-        moveCursorTo(x, y, stream); // go to correct x,y
+        moveCursorTo(stream, x, y); // go to correct x,y
         std::string output;
         output.reserve(height * (width * 10)); // speed
         for (int row = 0; row < height; ++row) {

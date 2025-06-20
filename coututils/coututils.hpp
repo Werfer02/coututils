@@ -129,6 +129,6 @@ namespace coututils{
                                                                          CharScreenPixel borderright = ']');
     
     void clearScreen(std::ostream& stream);
-    void moveCursorTo(int x, int y, std::ostream& stream);
+    void moveCursorTo(std::ostream& stream, int x, int y);
 
 }
