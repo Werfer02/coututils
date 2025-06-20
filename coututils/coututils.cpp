@@ -210,6 +210,50 @@ namespace coututils {
 
     }
 
+    void drawASCIITextAt(std::ostream& stream, int x, int y, const std::string& text, int fontsize, CharScreenPixel defaultchar){
+
+        int fontdimension = fontsize * 4 + 1;
+        std::string output;
+
+        moveCursorTo(stream, x, y);
+
+        for (int i = 0; i < fontdimension; i++){
+
+            for (const char c : text) {
+                if(c == ' ') {
+                    output += std::string(fontdimension + 1, ' ');
+                    continue;
+                }
+                std::string asciicharline = ASCIIfont::fonts.at(fontsize).characters[i].substr((ASCIIfont::charToASCIIIndex(c)) * (fontdimension + 1), fontdimension + 1);
+                if (defaultchar.ch != '#' || !defaultchar.styles.empty()) {
+                    std::string styledline;
+                    for (char ch : asciicharline) {
+                        if (ch == '#') {
+                            styledline += defaultchar.styles;  // insert styles before
+                            styledline += defaultchar.ch;
+                        } else {
+                            styledline += ch; // keep unchanged
+                        }
+                    }
+                    asciicharline = styledline;
+                }
+                output += asciicharline;
+
+            }
+
+            output += ansi::reset;
+            if (i < fontdimension - 1){
+
+                output += ansi::cursor_down + "\033[" + std::to_string(text.length() * (fontdimension + 1)) + "D"; // move down one row and back to start
+
+            } 
+
+        }
+
+        stream << output;
+
+    }
+
     void drawprogressbar(std::ostream& stream, int size, float progress, CharScreenPixel fill, CharScreenPixel empty, CharScreenPixel borderleft, CharScreenPixel borderright) {
         int filled = static_cast<int>(size * progress);
         int unfilled = size - filled;

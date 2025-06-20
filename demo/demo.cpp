@@ -83,7 +83,8 @@ int main() {
     imageScreen2.drawScreen(std::cout);
     imageScreen3.drawScreenAt(std::cout, 45, 14);
     imageScreen4.drawScreenAt(std::cout, 90, 14);
-    std::cout << "\n";
+    coututils::drawASCIITextAt(std::cout, 130, 10, "very cool");
+    std::cout << "\n\n\n\n\n\n\n";
 
     stbi_image_free(data1);
     stbi_image_free(data2);
