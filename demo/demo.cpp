@@ -71,6 +71,7 @@ int main() {
 
     coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data1, width1, height1, channels1);
     imageScreen.drawScreen(std::cout);
+    std::cout << "\n";
 
     coututils::CharScreen imageScreen2(30, 15);
     imageScreen2.loadImageToScreen(data1, width1, height1, channels1, coututils::nearestNeighbourScale);
@@ -80,10 +81,8 @@ int main() {
     imageScreen4.loadImageToScreen(data3, width3, height3, channels3, coututils::nearestNeighbourScale);
 
     imageScreen2.drawScreen(std::cout);
-    std::cout << "\n";
-    imageScreen3.drawScreenAt(std::cout, 45, 16);
-    std::cout << "\n\n";
-    imageScreen4.drawScreenAt(std::cout, 90, 16);
+    imageScreen3.drawScreenAt(std::cout, 45, 14);
+    imageScreen4.drawScreenAt(std::cout, 90, 14);
     std::cout << "\n";
 
     stbi_image_free(data1);

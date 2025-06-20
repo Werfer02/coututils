@@ -65,14 +65,14 @@ namespace coututils {
                 if (extrahorizontalspacing) output += " "; 
                 output += ansi::reset; // reset styles
             }
-            output += "\n";
+            if(i < height - 1) output += "\n";
         }
 
         stream << output;
     }
 
     void CharScreen::drawScreenInPlace(std::ostream& stream) {
-        moveCursorTo(0, height, stream); // move cursor to top left
+        moveCursorTo(0, height - 1, stream); // move cursor to top left
         drawScreen(stream);
     }
 
@@ -175,13 +175,13 @@ namespace coututils {
     void drawASCIItext(std::ostream& stream, const std::string& text, int fontsize, CharScreenPixel defaultchar) {
 
         int fontdimension = fontsize * 4 + 1;
+        std::string output;
 
         for (int i = 0; i < fontdimension; i++){
 
-            std::string asciiline;
             for (const char c : text) {
                 if(c == ' ') {
-                    asciiline += std::string(fontdimension + 1, ' ');
+                    output += std::string(fontdimension + 1, ' ');
                     continue;
                 }
                 std::string asciicharline = ASCIIfont::fonts.at(fontsize).characters[i].substr((ASCIIfont::charToASCIIIndex(c)) * (fontdimension + 1), fontdimension + 1);
@@ -197,14 +197,16 @@ namespace coututils {
                     }
                     asciicharline = styledline;
                 }
-                asciiline += asciicharline;
+                output += asciicharline;
 
             }
 
-            if (i < fontdimension - 1) stream << asciiline << ansi::reset << "\n";
-            else stream << asciiline << ansi::reset; // last line without newline
+            if (i < fontdimension - 1) output += ansi::reset + "\n";
+            else output += ansi::reset; // last line without newline
 
         }
+
+        stream << output;
 
     }
 
