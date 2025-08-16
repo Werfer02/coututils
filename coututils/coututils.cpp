@@ -25,7 +25,7 @@ namespace coututils {
             SetConsoleMode(hConsole, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING); // add this flag to the console mode
         }
     #else
-        void initWindowsConsole() {return;}
+        void initWindowsConsole() {}
     #endif
 
     void clearScreen(std::ostream& stream) {

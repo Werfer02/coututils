@@ -47,6 +47,7 @@ int main() {
         screen.drawScreenInPlace(std::cout);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
+    std::cout << "\n";
 
     coututils::drawASCIItext(std::cout, "Hello, World!", 1);
     std::cout << "\n";
