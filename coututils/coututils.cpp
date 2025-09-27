@@ -216,6 +216,7 @@ namespace coututils {
         std::string output;
 
         moveCursorTo(stream, x, y);
+        stream << "\n";
 
         for (int i = 0; i < fontdimension; i++){
 

@@ -62,13 +62,13 @@ int main() {
     std::cout << "Moved back!\n";
 
     int width1, height1, channels1;
-    unsigned char* data1 = stbi_load("../demo/apple_50x50.bmp", &width1, &height1, &channels1, 0);
+    unsigned char* data1 = stbi_load("./demo/apple_50x50.bmp", &width1, &height1, &channels1, 0);
 
     int width2, height2, channels2;
-    unsigned char* data2 = stbi_load("../demo/orange_50x50.bmp", &width2, &height2, &channels2, 0);
+    unsigned char* data2 = stbi_load("./demo/orange_50x50.bmp", &width2, &height2, &channels2, 0);
 
     int width3, height3, channels3;
-    unsigned char* data3 = stbi_load("../demo/banana_50x50.bmp", &width3, &height3, &channels3, 0);
+    unsigned char* data3 = stbi_load("./demo/banana_50x50.bmp", &width3, &height3, &channels3, 0);
 
     coututils::CharScreen imageScreen = coututils::CharScreen::loadImage(data1, width1, height1, channels1);
     imageScreen.drawScreen(std::cout);
