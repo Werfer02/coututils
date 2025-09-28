@@ -4,6 +4,15 @@ Ignore this please I need to remake this completely
 
 WIP TUI utility library in C++ (ab)using ANSI escape codes
 
+## how to build 
+```console
+git clone https://github.com/Werfer02/coututils
+cd coututils
+cmake .
+make
+```
+this builds the library and demo (coututilsdemo) into root directory
+
 ## features
 - customizable progress bars
 - customizable ASCII art text rendering
