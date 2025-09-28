@@ -1,5 +1,7 @@
 # coututils
 
+Ignore this please I need to remake this completely
+
 WIP TUI utility library in C++ (ab)using ANSI escape codes
 
 ## features
