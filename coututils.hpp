@@ -1,4 +1,12 @@
 #include <string>
+#include <iostream>
+
+#ifdef _WIN32
+    #include <windows.h>
+#else
+    #include <termios.h>
+    #include <unistd.h>
+#endif
 
 namespace ansi {
 
@@ -71,4 +79,62 @@ namespace ansi {
         return "\033[48;2;" + std::to_string(r) + ";" + std::to_string(g) + ";" + std::to_string(b) + "m";
     }
 
+    inline void disableMouseTracking(){
+        std::cout << "\033[?1003l";
+        std::cout << "\033[?1006l";
+    }
+
+    #ifdef _WIN32
+        inline void enableVirtualProcessing(){
+            HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+            DWORD oldOut;
+            GetConsoleMode(hOut, &oldOut);
+            SetConsoleMode(hOut, oldOut | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+        }
+        inline void disableVirtualProcessing(){
+            HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+            DWORD oldOut;
+            GetConsoleMode(hOut, &oldOut);
+            SetConsoleMode(hOut, oldOut & ~ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+        }
+        inline void enableVirtualInput(){
+            HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+            DWORD oldIn;
+            GetConsoleMode(hIn, &oldIn);
+            SetConsoleMode(hIn, (oldIn | ENABLE_VIRTUAL_TERMINAL_INPUT) & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT));
+        }
+        inline void disableVirtualInput(){
+            HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+            DWORD oldIn;
+            GetConsoleMode(hIn, &oldIn);
+            SetConsoleMode(hIn, (oldIn & ~ENABLE_VIRTUAL_TERMINAL_INPUT) | ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
+        }
+    #else
+        inline void enableVirtualProcessing(){}
+        inline void disableVirtualProcessing(){}
+        inline void enableVirtualInput(){
+            termios raw;
+            tcgetattr(STDIN_FILENO, &raw);
+
+            raw.c_lflag &= ~(ICANON | ECHO);
+            raw.c_iflag &= ~(IXON | ICRNL);
+
+            tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+        }
+        inline void disableVirtualInput(){
+            termios raw;
+            tcgetattr(STDIN_FILENO, &raw);
+
+            raw.c_lflag |= ICANON | ECHO;
+            raw.c_iflag |= IXON | ICRNL;
+
+            tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+        }
+    #endif
+
+    inline void enableMouseTracking(){
+        enableVirtualInput();
+        std::cout << "\033[?1003h"; // all movement and clicks
+        std::cout << "\033[?1006h"; // decimal coordinates
+    }
 }
