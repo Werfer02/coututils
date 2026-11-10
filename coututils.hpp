@@ -68,6 +68,9 @@ namespace ansi {
     inline const std::string cursor_home = "\033[G";
     inline const std::string cursor_topleft = "\033[H";
 
+    inline const std::string hide_cursor = "\033[?25l";
+    inline const std::string show_cursor = "\033[?25h";
+
     inline const std::string clear = "\033[J"; // note: not 100% sure but i think this clears from current position to as far down and right as the cursor can go
 
     inline const std::string brightnessmap = " .`^\",:;Il!i~+_-?][}{1)(|\\/*tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
